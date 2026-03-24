@@ -52,4 +52,8 @@ function PlacesList({ places }) {
   );
 }
 
+<<<<<<< HEAD
 export default PlacesList;
+=======
+export default PlacesList;
+>>>>>>> fd554ea6c6bcbf047a511dff4a40da0a5171d867

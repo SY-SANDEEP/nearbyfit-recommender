@@ -91,4 +91,8 @@ function MapView({ places }) {
   );
 }
 
+<<<<<<< HEAD
 export default MapView;
+=======
+export default MapView;
+>>>>>>> fd554ea6c6bcbf047a511dff4a40da0a5171d867

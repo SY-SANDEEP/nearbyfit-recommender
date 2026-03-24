@@ -47,4 +47,8 @@ function Controls({ onSearch }) {
   );
 }
 
+<<<<<<< HEAD
 export default Controls;
+=======
+export default Controls;
+>>>>>>> fd554ea6c6bcbf047a511dff4a40da0a5171d867
