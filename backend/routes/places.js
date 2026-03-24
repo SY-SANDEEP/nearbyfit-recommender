@@ -36,14 +36,30 @@ router.post("/recommend", async (req, res) => {
 
     console.log("Calling Overpass API...");
 
-    const response = await axios.post(
-      "https://overpass-api.de/api/interpreter",
-      query,
-      { 
-        headers: { "Content-Type": "text/plain" },
-        timeout: 60000 
-      }
-    );
+    const OVERPASS_MIRRORS = [
+  "https://overpass.kumi.systems/api/interpreter",
+  "https://overpass.private.coffee/api/interpreter",
+  "https://overpass-api.de/api/interpreter"
+];
+
+let response = null;
+for (const mirror of OVERPASS_MIRRORS) {
+  try {
+    console.log("Trying mirror:", mirror);
+    response = await axios.post(mirror, query, {
+      headers: { "Content-Type": "text/plain" },
+      timeout: 30000
+    });
+    console.log("Success with mirror:", mirror);
+    break;
+  } catch (mirrorError) {
+    console.error("Mirror failed:", mirror, mirrorError.message);
+  }
+}
+
+if (!response) {
+  return res.status(500).json({ message: "All Overpass mirrors failed. Try again later." });
+}
 
     console.log("Overpass response received, elements:", response.data?.elements?.length);
 
